@@ -801,6 +801,7 @@ function populateSegments(s)
 							`<option value="1" ${inst.m12==1?' selected':''}>Bar</option>`+
 							`<option value="2" ${inst.m12==2?' selected':''}>Arc</option>`+
 							`<option value="3" ${inst.m12==3?' selected':''}>Corner</option>`+
+							`<option value="4" ${inst.m12==4?' selected':''}>Pinwheel</option>`+
 						`</select></div>`+
 					`</div>`;
 		let sndSim = `<div data-snd="si" class="lbl-s hide">Sound sim<br>`+
@@ -1497,6 +1498,12 @@ function readState(s,command=false)
 	if (s.error && s.error != 0) {
 		var errstr = "";
 		switch (s.error) {
+			case  1:
+				errstr = "Denied!";
+				break;
+			case  3:
+				errstr = "Buffer locked!";
+				break;
 			case  8:
 				errstr = "Effect RAM depleted!";
 				break;
@@ -2819,9 +2826,9 @@ function search(field, listId = null) {
 	const search = field.value !== '';
 
 	// restore default preset sorting if no search term is entered
-	if (listId === 'pcont' && !search) {
-		populatePresets();
-		return;
+	if (!search) {
+		if (listId === 'pcont')   { populatePresets(); return; }
+		if (listId === 'pallist') { populatePalettes(); return; }
 	}
 
 	// clear filter if searching in fxlist
