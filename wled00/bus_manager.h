@@ -14,8 +14,10 @@ uint16_t approximateKelvinFromRGB(uint32_t rgb);
 #define SET_BIT(var,bit)    ((var)|=(uint16_t)(0x0001<<(bit)))
 #define UNSET_BIT(var,bit)  ((var)&=(~(uint16_t)(0x0001<<(bit))))
 
-#define NUM_ICS_WS2812_1CH_3X(len) (((len)+2)/3)   // 1 WS2811 IC controls 3 zones (each zone has 1 LED, W)
-#define IC_INDEX_WS2812_1CH_3X(i)  ((i)/3)
+#define NUM_ICS_WS2812_1CH_3X(len)    (((len)+2)/3)   // 1 WS2811 IC controls 3 zones (each zone has 1 LED, W)
+#define NUM_ICS_WS2812_2CH_RGB_W(len) ((len)*2)
+#define IC_INDEX_WS2812_1CH_3X(i)     ((i)/3)
+#define IC_INDEX_WS2812_2CH_RGB_W(i)  ((i)*2)
 
 #define NUM_ICS_WS2812_2CH_3X(len) (((len)+1)*2/3) // 2 WS2811 ICs control 3 zones (each zone has 2 LEDs, CW and WW)
 #define IC_INDEX_WS2812_2CH_3X(i)  ((i)*2/3)
